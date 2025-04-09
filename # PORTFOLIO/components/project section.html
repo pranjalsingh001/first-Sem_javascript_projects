@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlapping Projects Section</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --secondary: #6366f1;
+      --accent: #f472b6;
+      --dark: #0f172a;
+      --darker: #0d1117;
+      --light: #f8fafc;
+      --neon-blue: #00c8ff;
+      --neon-purple: #b026ff;
+      --neon-pink: #ff2d92;
+      --neon-green: #00ff9d;
+    }
+
+    body {
+      background-color: var(--darker);
+      color: var(--light);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      perspective: 1000px;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Background with geometric shapes */
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+
+    .cube {
+      width: 60px;
+      height: 60px;
+      transform-style: preserve-3d;
+      animation: rotateCube 20s linear infinite;
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--neon-blue);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 15px var(--neon-blue);
+      opacity: 0.6;
+    }
+
+    .sphere {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--neon-purple), transparent);
+      box-shadow: 0 0 15px var(--neon-purple);
+      animation: floatingSphere 20s ease-in-out infinite;
+    }
+
+    .pyramid {
+      width: 0;
+      height: 0;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      border-bottom: 70px solid var(--neon-pink);
+      filter: drop-shadow(0 0 10px var(--neon-pink));
+      animation: rotatePyramid 10s linear infinite;
+    }
+
+    @keyframes rotateCube {
+      0% { transform: rotateX(0) rotateY(0) rotateZ(0) translate3d(0, 0, 0); }
+      100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg) translate3d(20px, 20px, 0); }
+    }
+
+    @keyframes floatingSphere {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(30px, -30px, 20px); }
+    }
+
+    @keyframes rotatePyramid {
+      0% { transform: rotateY(0) translate3d(0, 0, 0); }
+      100% { transform: rotateY(360deg) translate3d(20px, -20px, 0); }
+    }
+
+    /* Section title styling */
+    .section-title {
+      text-align: center;
+      margin: 3rem 0 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .neon-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--light);
+      text-shadow: 0 0 10px var(--neon-blue), 
+                  0 0 20px var(--neon-blue), 
+                  0 0 30px var(--neon-blue);
+      animation: pulseGlow 3s infinite alternate;
+    }
+
+    .neon-underline {
+      height: 3px;
+      width: 150px;
+      margin: 15px auto;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+      border-radius: 3px;
+      box-shadow: 0 0 10px var(--neon-purple);
+    }
+
+    /* Projects container */
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+      width: 100%;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Project Card Styling */
+    .project-card {
+      width: 75%;
+      height: 98vh;
+      background: rgba(5, 7, 11, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding:30px;
+      transform: perspective(1000px) rotateX(5deg) translateY(100px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      overflow: hidden;
+
+    }
+
+    .project-card:first-child {
+      margin-top: 0;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-green)) border-box;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+      mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: borderGlow 3s linear infinite;
+    }
+
+    .project-card.visible {
+      transform: perspective(1000px) rotateX(0) translateY(0);
+      opacity:1;
+    }
+
+    .project-card:hover {
+      transform: perspective(1000px) rotateX(0) translateY(-10px) scale(1.02);
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Project content styling */
+    .project-content {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)) border-box;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+      mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.3);
+    }
+
+    .project-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
+    }
+
+    .project-description {
+      color: var(--light);
+      margin-bottom: 25px;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-height: 80px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-description.scrolling {
+      animation: textScroll 0s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .project-card:hover .project-description.scrolling {
+      animation-play-state: running;
+    }
+
+    @keyframes textScroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(calc(-100% + 80px)); }
+    }
+
+    .view-project {
+      align-self: flex-start;
+      padding: 10px 25px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 5px;
+      color: var(--light);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+    }
+
+    .view-project::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .view-project:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.5);
+    }
+
+    .view-project:hover::before {
+      opacity: 1;
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .view-project:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    /* Scan line effect */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 15;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .scanlines::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 200, 255, 0.05) 0.5%,
+        transparent 1%
+      );
+      animation: scanline 8s linear infinite;
+    }
+
+    .project-card:hover .scanlines {
+      opacity: 0.8;
+    }
+
+    /* Animations */
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 0 0 10px var(--neon-blue), 
+                    0 0 20px var(--neon-blue), 
+                    0 0 30px var(--neon-blue);
+      }
+      50% {
+        text-shadow: 0 0 15px var(--neon-blue), 
+                    0 0 30px var(--neon-blue), 
+                    0 0 45px var(--neon-blue),
+                    0 0 60px var(--neon-blue);
+      }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes borderGlow {
+      0% { box-shadow: 0 0 10px var(--neon-blue); }
+      25% { box-shadow: 0 0 10px var(--neon-purple); }
+      50% { box-shadow: 0 0 10px var(--neon-pink); }
+      75% { box-shadow: 0 0 10px var(--neon-green); }
+      100% { box-shadow: 0 0 10px var(--neon-blue); }
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .project-card {
+        width: 85%;
+      }
+      .neon-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-card {
+        width: 90%;
+        margin-top: -3rem;
+      }
+      .neon-title {
+        font-size: 2rem;
+      }
+      .project-image {
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .project-card {
+        width: 95%;
+        margin-top: -2rem;
+        padding: 20px;
+      }
+      .project-image {
+        height: 180px;
+      }
+      .project-title {
+        font-size: 1.5rem;
+      }
+    }
+
+
+  </style></head>
+<body>
+  <!-- Background with geometric shapes -->
+  <div class="background-container" id="background"></div>
+
+  <div class="container">
+    <!-- Projects Section Title -->
+    <div class="section-title">
+      <h2 class="neon-title">🚀 Featured Projects</h2>
+      <div class="neon-underline"></div>
+    </div>
+
+    <!-- Projects Container -->
+    <div class="projects-container">
+      <!-- Project Card 1 -->
+      <div class="project-card">
+        <div class="project-content">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/800x400/0d1117/00c8ff?text=Neural+Network+Project" alt="Neural Network Project">
+          </div>
+          <h3 class="project-title">Neural Interface</h3>
+          <p class="project-description scrolling">A cutting-edge neural network visualization platform that allows data scientists to see their AI models in action. Features real-time data processing, interactive node manipulation, and export capabilities for presentations. The system uses advanced WebGL techniques to render complex neural networks with thousands of nodes while maintaining smooth performance.</p>
+          <a href="#" class="view-project">
+            Explore Project <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+
+      <!-- Project Card 2 -->
+      <div class="project-card">
+        <div class="project-content">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/800x400/0d1117/b026ff?text=Cybernetic+Dashboard" alt="Cybernetic Dashboard">
+          </div>
+          <h3 class="project-title">Quantum Dashboard</h3>
+          <p class="project-description scrolling">An advanced analytics platform with holographic data visualization and real-time metrics. This dashboard integrates multiple data sources and presents them in an intuitive 3D interface. Users can interact with data points, drill down into specific metrics, and generate custom reports with a simple gesture-based system.</p>
+          <a href="#" class="view-project">
+            Explore Project <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+
+      <!-- Project Card 3 -->
+      <div class="project-card">
+        <div class="project-content">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/800x400/0d1117/ff2d92?text=Digital+Ecosystem" alt="Digital Ecosystem">
+          </div>
+          <h3 class="project-title">Neon Pulse</h3>
+          <p class="project-description scrolling">A reactive multimedia experience that responds to user movement and sound. This immersive installation uses computer vision to track participants and generate personalized visual and audio elements. The experience adapts to crowd size, ambient noise, and even time of day to create a unique digital ecosystem every time.</p>
+          <a href="#" class="view-project">
+            Explore Project <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+
+      <!-- Project Card 4 -->
+      <div class="project-card">
+        <div class="project-content">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/800x400/0d1117/00ff9d?text=Holographic+Interface" alt="Holographic Interface">
+          </div>
+          <h3 class="project-title">Synth World</h3>
+          <p class="project-description scrolling">A WebGL-powered virtual environment with procedurally generated landscapes and interactive elements. This experimental project combines advanced shader techniques with spatial audio to create surreal digital worlds. Users can explore, modify and share their discoveries within the community.</p>
+          <a href="#" class="view-project">
+            Explore Project <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+
+      <!-- Project Card 5 -->
+      <div class="project-card">
+        <div class="project-content">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/800x400/0d1117/00c8ff?text=Augmented+Reality" alt="Augmented Reality">
+          </div>
+          <h3 class="project-title">Cyber Portal</h3>
+          <p class="project-description scrolling">An AR portal experience that blends digital and physical worlds using cutting-edge web technologies. This browser-based application uses device cameras to identify surfaces and project virtual doorways to fantastical environments. The experience works across multiple devices without requiring any app installation.</p>
+          <a href="#" class="view-project">
+            Explore Project <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Generate floating background shapes
+      const background = document.getElementById('background');
+      const shapeTypes = ['cube', 'sphere', 'pyramid'];
+      const neonColors = ['--neon-blue', '--neon-purple', '--neon-pink', '--neon-green'];
+      
+      // Create 15 random shapes
+      for (let i = 0; i < 15; i++) {
+        createRandomShape();
+      }
+      
+      function createRandomShape() {
+        const shape = document.createElement('div');
+        const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+        shape.classList.add('shape');
+        
+        // Random position
+        const xPos = Math.random() * 100;
+        const yPos = Math.random() * 100;
+        const zPos = Math.random() * 100 - 50;
+        
+        shape.style.left = `${xPos}%`;
+        shape.style.top = `${yPos}%`;
+        shape.style.zIndex = Math.floor(zPos);
+        
+        // Random animation duration and delay
+        const duration = 15 + Math.random() * 20;
+        const delay = Math.random() * 10;
+        
+        if (shapeType === 'cube') {
+          shape.classList.add('cube');
+          for (let j = 0; j < 6; j++) {
+            const face = document.createElement('div');
+            face.classList.add('cube-face');
+            face.style.transform = getTransform(j);
+            shape.appendChild(face);
+          }
+          shape.style.animation = `rotateCube ${duration}s linear infinite`;
+        } else if (shapeType === 'sphere') {
+          shape.classList.add('sphere');
+          const color = getComputedStyle(document.documentElement).getPropertyValue(neonColors[Math.floor(Math.random() * neonColors.length)]);
+          shape.style.background = `radial-gradient(circle at 30% 30%, ${color}, transparent)`;
+          shape.style.animation = `floatingSphere ${duration}s ease-in-out infinite`;
+        } else if (shapeType === 'pyramid') {
+          shape.classList.add('pyramid');
+          const color = getComputedStyle(document.documentElement).getPropertyValue(neonColors[Math.floor(Math.random() * neonColors.length)]);
+          shape.style.borderBottomColor = color;
+          shape.style.animation = `rotatePyramid ${duration}s linear infinite`;
+        }
+        
+        shape.style.animationDelay = `-${delay}s`;
+        background.appendChild(shape);
+      }
+      
+      function getTransform(faceIndex) {
+        switch(faceIndex) {
+          case 0: return 'translateZ(30px)';
+          case 1: return 'rotateY(180deg) translateZ(30px)';
+          case 2: return 'rotateY(90deg) translateZ(30px)';
+          case 3: return 'rotateY(-90deg) translateZ(30px)';
+          case 4: return 'rotateX(90deg) translateZ(30px)';
+          case 5: return 'rotateX(-90deg) translateZ(30px)';
+        }
+      }
+      
+      // Scroll animation for project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      const projectDescriptions = document.querySelectorAll('.project-description');
+      
+      // Check if description needs scrolling animation
+      projectDescriptions.forEach(desc => {
+        if (desc.scrollHeight > desc.clientHeight) {
+          desc.classList.add('scrolling');
+        }
+      });
+      
+      // Intersection Observer to detect when cards enter viewport
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2
+      };
+      
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Slight delay between each card animation
+            setTimeout(() => {
+              entry.target.style.transitionDelay = '0s';
+            }, 300);
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, options);
+      
+      // Set different transition delays for staggered animation
+      projectCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    background-color: rgb(170, 250, 250);
+    position: relative;
+}
+.container-1,.container-2 {
+    display: grid;
+    grid-template-columns: 6fr 6fr; 
+    justify-content: center; 
+    background-color: aliceblue;
+    width: 50%;
+    padding: 0; 
+    border-radius: 20px;
+    box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    height: 50vh;
+    position: absolute;
+}
+.page1, .page2 {
+    text-align: center;
+    padding: 20px;
+    
+}
+.page2 {
+    background-color: rgb(121, 149, 249);
+    color: white;
+    margin: 0;
+    border-top-left-radius: 50%; 
+    border-bottom-left-radius: 50%; 
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+    
+}  
+.page2 span,.page2-1 span{
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+}  
+.page2 a,.page2-1 a{
+    text-decoration: none;
+    color: white;
+}
+.page2-1{
+    background-color: rgb(121, 149, 249);
+    color: white;
+    margin: 0;
+    border-top-right-radius: 50%; 
+    border-bottom-right-radius: 50%; 
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    padding: 10px;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    
+}
+
+.page1 button{
+    background-color: rgb(121, 149, 249) ;
+    color: white;
+    width: 100%;
+}

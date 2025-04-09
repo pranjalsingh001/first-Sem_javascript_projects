@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+div{
+    background-color: white;
+    width: 250px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: cursive;
+}
+
+.monthName{
+    background-color: orangered;
+    color: white;
+    margin: 0;
+    font-size: 30px;
+    padding: 10px;
+    
+}
+.dayName ,.year{
+    color: gray;
+   
+}
+.dayNumber{
+    font-weight: bold;
+    font-size: 50px;
+    margin: 0;
+}

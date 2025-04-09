@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Clean & Minimalist</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <section id="landing" class="landing-container ">
+        <div class="landing-content fade-in">
+            <h1 class="landing-title">Build Your Resume Effortlessly</h1>
+            <p class="landing-subtitle">Create professional, ATS-friendly resumes with our clean and minimalist builder. No distractions, just focus on what matters.</p>
+            
+            <div class="landing-features">
+                <div class="landing-feature">
+                    <i data-lucide="layout-template" class="w-10 h-10 mx-auto feature-icon"></i>
+                    <h3 class="text-lg font-medium mb-2">Clean Templates</h3>
+                    <p class="text-sm text-gray-600">Professional designs optimized for ATS systems</p>
+                </div>
+                <div class="landing-feature">
+                    <i data-lucide="download" class="w-10 h-10 mx-auto feature-icon"></i>
+                    <h3 class="text-lg font-medium mb-2">Easy Export</h3>
+                    <p class="text-sm text-gray-600">Download your resume as a perfectly formatted PDF</p>
+                </div>
+                <div class="landing-feature">
+                    <i data-lucide="text" class="w-10 h-10 mx-auto feature-icon"></i>
+                    <h3 class="text-lg font-medium mb-2">Smart Suggestions</h3>
+                    <p class="text-sm text-gray-600">Professional pre-written content to help you shine</p>
+                </div>
+            </div>
+            
+            <div class="landing-cta ">
+                <a href="#builder" class="btn btn-primary ">Start Building Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Header -->
+    <header class="py-6 border-b border-gray-200 bg-white sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-900">Resume Builder</h1>
+                <button id="theme-toggle" class="btn btn-secondary">
+                    <i data-lucide="moon" class="w-4 h-4"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Builder -->
+    <main id="builder" class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-8 builder-container">
+                <!-- Editor -->
+                <div class="space-y-6">
+                    <!-- Template Selection -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="layout-template" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Choose Template</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4" id="template-selector">
+                            <div class="template-card active" data-template="standard">
+                                <img src="images/standardTemplet.png"height="100%" alt="Standard">
+                                <div class="template-info">
+                                    <span class="text-sm font-medium">Standard</span>
+                                    <p class="text-xs text-gray-500 mt-1">One-column, ATS-friendly</p>
+                                </div>
+                            </div>
+                            
+                            <div class="template-card" data-template="modern">
+                                <img src="images/moderbTemplet.png" alt="Modern">
+                                <div class="template-info">
+                                    <span class="text-sm font-medium">Modern</span>
+                                    <p class="text-xs text-gray-500 mt-1">Subtle color accents</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="user" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Personal Information</h3>
+                        </div>
+                        <div class="grid gap-4">
+                            <input type="text" id="name" placeholder="Full Name" class="input-field">
+                            <input type="email" id="email" placeholder="Email" class="input-field">
+                            <input type="tel" id="phone" placeholder="Phone" class="input-field">
+                            <input type="text" id="location" placeholder="Location" class="input-field">
+                        </div>
+                    </div>
+
+                    <!-- Professional Summary -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="file-text" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Professional Summary</h3>
+                        </div>
+                        <textarea id="summary" rows="4" class="input-field mb-4" placeholder="Write a compelling professional summary..."></textarea>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="suggestion-pill" data-text="Experienced professional with a proven track record in driving results through strategic planning and execution. Skilled in team leadership and project management with a focus on delivering high-quality outcomes.">
+                                Professional
+                            </button>
+                            <button class="suggestion-pill" data-text="Detail-oriented [role] with expertise in analytical problem-solving and process improvement. Dedicated to maintaining high standards of accuracy while meeting tight deadlines.">
+                                Specialist
+                            </button>
+                            <button class="suggestion-pill" data-text="Results-driven leader with strong communication skills and a track record of building high-performing teams. Experienced in strategic planning and successful project delivery.">
+                                Leadership
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="briefcase" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Work Experience</h3>
+                        </div>
+                        <div id="experience-items" class="space-y-4"></div>
+                        <button id="add-experience" class="btn btn-secondary mt-4">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            Add Experience
+                        </button>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Education</h3>
+                        </div>
+                        <div id="education-items" class="space-y-4"></div>
+                        <button id="add-education" class="btn btn-secondary mt-4">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            Add Education
+                        </button>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="card">
+                        <div class="section-header">
+                            <i data-lucide="code" class="w-5 h-5 text-gray-600"></i>
+                            <h3>Skills</h3>
+                        </div>
+                        <div id="skills-items" class="space-y-4"></div>
+                        <div class="flex flex-wrap gap-2 mt-4 mb-4">
+                            <button class="suggestion-pill" data-text="JavaScript">
+                                JavaScript
+                            </button>
+                            <button class="suggestion-pill" data-text="React">
+                                React
+                            </button>
+                            <button class="suggestion-pill" data-text="Node.js">
+                                Node.js
+                            </button>
+                            <button class="suggestion-pill" data-text="Project Management">
+                                Project Management
+                            </button>
+                            <button class="suggestion-pill" data-text="Team Leadership">
+                                Team Leadership
+                            </button>
+                        </div>
+                        <button id="add-skill" class="btn btn-secondary">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            Add Skill
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="preview-container">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900">Preview</h2>
+                        <button id="download-pdf" class="btn btn-primary">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Download PDF
+                        </button>
+                    </div>
+                    <!-- here rasume preview will be generated dynamically with js code -->
+                    <div id="resume-preview" class="bg-white shadow-sm"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8 bg-gray-50 border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2025 Resume Builder. Clean, minimal, and professional.</p>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

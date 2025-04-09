@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Styler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="text-display">
+        <h1 id="text" contenteditable="true">Edit this text to see styling changes</h1>
+    </div>
+    
+    <div class="container mt-4"> 
+               
+        <div class="control-panel">
+            <div class="text-center mb-3">
+                <button class="reset-btn" onclick="resetStyles()"><i class="bi bi-arrow-counterclockwise me-2"></i>Reset Styles</button>
+            </div>
+            <dl class="row">
+                <div class="col-md-3 control-group">
+                    <dt><i class="bi bi-rulers me-2"></i>Font Size</dt>
+                    <dd>
+                        <input type="range" min="10" max="72" value="24" id="fontSize" oninput="updateFontSizeValue()" onchange="changeCSS()">
+                        <div class="d-flex justify-content-between mt-1">
+                            <small>10px</small>
+                            <span id="fontSizeValue">24px</span>
+                            <small>72px</small>
+                        </div>
+                    </dd>
+                </div>
+
+                <div class="col-md-3 control-group">
+                    <dt><i class="bi bi-palette me-2"></i>Color</dt>
+                    <dd>
+                        <input type="color" id="colorPicker" value="#4361ee" onchange="changeCSS()">
+                    </dd>
+                </div>
+
+                <div class="col-md-3 control-group">
+                    <dt><i class="bi bi-fonts me-2"></i>Style</dt>
+                    <dd>
+                        <select id="style" onchange="changeCSS()">
+                            <option value="normal">Normal</option>
+                            <option value="bold">Bold</option>
+                            <option value="italic">Italic</option>
+                            <option value="bold italic">Bold Italic</option>
+                        </select>
+                    </dd>
+                </div>
+
+                <div class="col-md-3 control-group">
+                    <dt><i class="bi bi-text-left me-2"></i>Align</dt>
+                    <dd class="d-flex justify-content-start">
+                        <button class="align-btn active" onclick="changeAlignment('left')"><i class="bi bi-text-left"></i></button>
+                        <button class="align-btn" onclick="changeAlignment('center')"><i class="bi bi-text-center"></i></button>
+                        <button class="align-btn" onclick="changeAlignment('right')"><i class="bi bi-text-right"></i></button>
+                        <button class="align-btn" onclick="changeAlignment('justify')"><i class="bi bi-justify"></i></button>
+                    </dd>
+                </div>
+            </dl>
+            
+            <div class="row mt-3">
+                
+                <div class="col-md-6 control-group">
+                    <dt><i class="bi bi-fonts me-2"></i>Font Family</dt>
+                    <div class="row">
+                        <div class="col-4 font-card active" onclick="changeFontFamily('Arial, sans-serif')">
+                            <p style="font-family: Arial">Arial</p>
+                            <small>Sans-serif</small>
+                        </div>
+                        <div class="col-4 font-card" onclick="changeFontFamily('Georgia, serif')">
+                            <p style="font-family: Georgia">Georgia</p>
+                            <small>Serif</small>
+                        </div>
+                        <div class="col-4 font-card" onclick="changeFontFamily('Courier New, monospace')">
+                            <p style="font-family: Courier New">Courier</p>
+                            <small>Monospace</small>
+                        </div>
+                   
+                        <div class="col-4 font-card" onclick="changeFontFamily('Times New Roman, serif')">
+                            <p style="font-family: Times New Roman">Times</p>
+                            <small>Serif</small>
+                        </div>
+                        <div class="col-4 font-card" onclick="changeFontFamily('Verdana, sans-serif')">
+                            <p style="font-family: Verdana">Verdana</p>
+                            <small>Sans-serif</small>
+                        </div>
+                        <div class="col-4 font-card" onclick="changeFontFamily('Brush Script MT, cursive')">
+                            <p style="font-family: Brush Script MT">Script</p>
+                            <small>Cursive</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 control-group">
+                    <dt><i class="bi bi-image me-2"></i>Background</dt>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-option active" style="background: white" onclick="changeBackground('white')"></div>
+                        <div class="bg-option" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)" onclick="changeBackground('linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)')"></div>
+                        <div class="bg-option" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)" onclick="changeBackground('linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)')"></div>
+                        <div class="bg-option" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%)" onclick="changeBackground('linear-gradient(135deg, #f6d365 0%, #fda085 100%)')"></div>
+                        <div class="bg-option" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)" onclick="changeBackground('linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)')"></div>
+                    </div>
+                    <div class="mt-2">
+                        <input type="color" id="bgColorPicker" value="#ffffff" onchange="changeSolidBackground()" class="me-2">
+                        <small>Custom Color</small>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
