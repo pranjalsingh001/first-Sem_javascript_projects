@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizlet Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm px-8 py-4 flex justify-between items-center overflow-x-auto">
+        <div class="flex items-center">
+            <a href="#" class="text-indigo-600 font-bold text-3xl">Quizlet</a>
+            <div class="ml-8 flex gap-6">
+                <div class="dropdown">
+                    <button class="text-gray-700 font-medium flex items-center">
+                        Study tools
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button class="text-gray-700 font-medium flex items-center">
+                        Subjects
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="relative">
+            <div class="flex items-center bg-gray-100 rounded-md px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" placeholder="Search for practice tests" class="bg-transparent border-none outline-none ml-2 w-64">
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button class="flex items-center text-indigo-600 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Create
+            </button>
+            <button class="bg-indigo-600 text-white font-medium px-6 py-2 rounded-full hover:bg-indigo-700 transition">Log in</button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-12 px-4">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-bold text-gray-900 mb-4">How do you want to study?</h1>
+            <p class="text-xl text-gray-700 mb-8">Master whatever you're learning with Quizlet's interactive flashcards, practice tests<br>and study activities.</p>
+            <div class="flex justify-center mb-6">
+                <button class="bg-indigo-600 text-white font-medium px-8 py-3 rounded-full hover:bg-indigo-700 transition">Sign up for free</button>
+            </div>
+            <a href="#" class="text-indigo-600 font-medium hover:underline">I'm a teacher</a>
+        </div>
+
+        <div class="carousel relative p-3 ">
+            <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-4 shadow-md z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            
+            <div class="flex ">
+                <div class="study-card bg-indigo-600 text-white rounded-2xl w-1/4 mx-4 min-w-[300px] flex-shrink-0 p-6">
+                    <h2 class="text-2xl font-bold mb-36">Flashcards</h2>
+                    <div class="flashcard-preview  text-gray-800 rounded-lg shadow-lg">
+                        
+                        <img src="https://images.prismic.io/quizlet-web/ZpFuUR5LeNNTxHxc_2Flashcards%402x.png?auto=format,compress" alt="Heart anatomy" class="flashcard-preview  shadow-lg" >
+                    
+                    </div>
+                </div>
+                
+                <div class="study-card bg-orange-300 text-gray-900 rounded-2xl  w-1/4 mx-4 min-w-[300px] flex-shrink-0 p-6">
+                    <h2 class="text-2xl font-bold mb-4">Practice Tests</h2>
+                    <div class="test-stats flex mb-8 mt-8">
+                        <div class="stat mr-8">
+                            <p class="text-sm text-gray-700">Score</p>
+                            <p class="text-2xl font-bold">84%</p>
+                        </div>
+                        <div class="stat mr-8">
+                            <p class="text-sm text-gray-700">Results</p>
+                            <p class="text-2xl font-bold">76/90</p>
+                        </div>
+                        <div class="stat">
+                            <p class="text-sm text-gray-700">Total time</p>
+                            <p class="text-2xl font-bold">70m</p>
+                        </div>
+                    </div>
+                    <div class="test-preview bg-white p-4 rounded-lg shadow">
+                        <p class="font-medium">1.</p>
+                        <div class="h-2 bg-gray-200 rounded w-full mt-2"></div>
+                        <div class="h-2 bg-gray-200 rounded w-3/4 mt-2"></div>
+                    </div>
+                </div>
+                
+                <div class="study-card bg-green-200 text-gray-900 rounded-2xl  w-1/4 mx-4 min-w-[300px] flex-shrink-0 p-6">
+                    <h2 class="text-2xl font-bold mb-36">Expert Solutions</h2>
+                    <div class="solutions-preview bg-white p-4 rounded-lg shadow-lg flex items-center">
+                        <div class="book-cover bg-blue-800 text-white rounded p-2 mr-4 h-16 w-12 flex items-center justify-center">
+                            <span class="text-xs">Calculus</span>
+                        </div>
+                        <div class="solution-content w-full">
+                            <div class="h-2 bg-gray-200 rounded w-full"></div>
+                            <div class="h-2 bg-gray-200 rounded w-3/4 mt-2"></div>
+                            <div class="h-2 bg-gray-200 rounded w-1/2 mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="study-card bg-blue-200 text-gray-900 rounded-2xl  w-1/4 mx-4 min-w-[300px] flex-shrink-0 p-6">
+                    <h2 class="text-2xl font-bold mb-36">Learn</h2>
+                    <div class="learn-preview bg-white p-4 rounded-lg shadow-lg flex items-center">
+                        <div class="learn-content flex-1">
+                            <p class="text-lg">la pintura</p>
+                        </div>
+                        <img src="/api/placeholder/80/80" alt="Learn concept" class="ml-4 rounded">
+                    </div>
+                </div>
+            </div>
+            
+            <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-4 shadow-md z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- NEW FEATURE: AI Study Assistant -->
+        <div class="mt-16 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white shadow-lg">
+            <div class="flex items-center justify-between">
+                <div class="w-2/3">
+                    <h2 class="text-3xl font-bold mb-4">NEW: AI Study Assistant</h2>
+                    <p class="text-lg mb-6">Get personalized help with your studies! Our AI assistant can create custom flashcards, generate practice questions, and provide explanations for complex topics.</p>
+                    <div class="flex gap-4">
+                        <button class="bg-white text-indigo-700 font-medium px-6 py-3 rounded-full hover:bg-gray-100 transition">Try it now</button>
+                        <button class="border border-white text-white font-medium px-6 py-3 rounded-full hover:bg-white/10 transition">Learn more</button>
+                    </div>
+                </div>
+                <div class="w-1/3 flex justify-center">
+                    <div class="bg-white/20 p-6 rounded-2xl backdrop-blur-sm">
+                        <div class="chat-bubble bg-white text-indigo-900 p-3 rounded-lg mb-3">
+                            <p class="text-sm">How do I solve this calculus problem?</p>
+                        </div>
+                        <div class="chat-bubble bg-indigo-900 text-white p-3 rounded-lg">
+                            <p class="text-sm">Let me break it down step by step...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="container mx-auto px-4 py-8 space-y-16">
+
+        <!-- Section 1 -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl  font-bold">Every class, every test, one ultimate study app</h2>
+            <p class="text-xl mt-3">Create your own flashcards or find sets made by teachers, students and experts. Study them anytime, anywhere with our free app.</p>
+            <div class="flex mt-4 space-x-4">
+              <img src="<!-- App Store Icon -->" alt="App Store" class="h-10">
+              <img src="<!-- Google Play Icon -->" alt="Google Play" class="h-10">
+            </div>
+          </div>
+          <div class="text-center">
+            <img src="https://images.prismic.io/quizlet-web/ZuNiTbVsGrYSvUQH_EN-GB1Flashcards.png?auto=format,compress" alt="">
+            <!-- <div class="bg-gray-200 h-48 rounded-xl"></div> -->
+          </div>
+        </div>
+    
+        <!-- Section 2 -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="text-center">
+            <img src="https://images.prismic.io/quizlet-web/ZpWfEh5LeNNTxK_T_study-guides-image.png?auto=format,compress" alt="">
+            <!-- <div class="bg-purple-200 h-48 rounded-xl"></div> -->
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Make studying class material quick and easy</h2>
+            <p class=" text-xl mt-3">Turn your slides, videos and notes into flashcard sets, practice tests and study guides.</p>
+            <button class="btn btn-primary mt-4">Try it out</button>
+          </div>
+        </div>
+    
+        <!-- Section 3 -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl font-bold">Prepare for tests on any subject</h2>
+            <p class="mt-3 text-xl">Memorise anything with personalised practice tests and revision sessions in Learn. 98% of students say Quizlet has improved their comprehension.</p>
+            <button class="btn btn-primary mt-4">Get started</button>
+          </div>
+          <div class="text-center">
+            <img src="https://images.prismic.io/quizlet-web/ZpWfEx5LeNNTxK_U_learn-image.png?auto=format,compress" alt="">
+            <!-- <div class="bg-blue-200 h-48 rounded-xl"></div> -->
+          </div>
+        </div>
+    
+        <!-- Section 4 -->
+        <div class="grid md:grid-cols-2 gap-8 items-center bg-purple-100 p-6 rounded-xl">
+          <div>
+            <h3 class="uppercase text-sm font-bold text-gray-600">Teachers</h3>
+            <h2 class="text-2xl font-bold">Empower your students</h2>
+            <p class="mt-3 text-xl">Help every student learn anything with confidence. With free flashcard sets, study modes and in-class games like Quizlet Live, you can create a more engaged classroom instantly.</p>
+            <button class="btn btn-primary mt-4">Sign up as a teacher</button>
+            <p class="mt-2 text-blue-600 hover:underline cursor-pointer">See how teachers use Quizlet</p>
+          </div>
+          <div class="text-center">
+            <img src="https://images.prismic.io/quizlet-web/ZpFqjB5LeNNTxHvk_teacher-image-LOH.png?auto=format,compress" alt="">
+            <!-- <div class="bg-white h-48 rounded-xl"></div> -->
+          </div>
+        </div>
+    
+    </div>
+
+
+    <div class="bg-gray-100 text-gray-900">
+
+        <div class="max-w-6xl mx-auto py-10 px-4">
+          <h1 class="text-3xl font-bold text-center mb-8">Popular Flashcard Sets</h1>
+      
+          <div id="flashcardPage" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Cards will be rendered here -->
+          </div>
+      
+          <div class="flex justify-center items-center gap-6">
+            <button id="prevBtn" class="w-10 h-10 flex items-center justify-center border rounded-full text-lg">&larr;</button>
+            <span id="pageIndicator" class="text-lg font-medium">1/2</span>
+            <button id="nextBtn" class="w-10 h-10 flex items-center justify-center border rounded-full text-lg">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    <footer class="bg-gray-100 py-10 mt-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gray-800 font-semibold mb-4">About</h3>
+                    <ul class="text-gray-600">
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">About Quizlet</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">How Quizlet works</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Advertise</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-800 font-semibold mb-4">For Students</h3>
+                    <ul class="text-gray-600">
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Flashcards</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Learn</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Solutions</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Quizlet Plus</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-800 font-semibold mb-4">For Teachers</h3>
+                    <ul class="text-gray-600">
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Live</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Checkpoint</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-indigo-600">Quizlet for Teachers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-800 font-semibold mb-4">Follow Us</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-600 hover:text-indigo-600">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-indigo-600">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-indigo-600">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-600 text-sm">&copy; 2025 Quizlet Inc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
